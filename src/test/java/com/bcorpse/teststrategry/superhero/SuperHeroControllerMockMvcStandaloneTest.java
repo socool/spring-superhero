@@ -89,7 +89,21 @@ public class SuperHeroControllerMockMvcStandaloneTest {
 
     @Test
     public void canRetrieveByNameWhenExists() throws Exception {
+        //given
+        given(superHeroRepository.getSuperHero(3))
+                .willReturn(new SuperHero("Peter","Benjamin","Parker","Spider-Man"));
 
+        //when
+        MockHttpServletResponse response = mvc.perform(
+                get("/superheroes/3").param("name","Spider-Man")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andReturn().getResponse();
+
+        //then
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.getContentAsString()).isEqualTo(
+                jsonSuperHero.write(new SuperHero("Peter", "Benjamin","Parker", "Spider-Man")).getJson()
+        );
     }
 
     @Test
