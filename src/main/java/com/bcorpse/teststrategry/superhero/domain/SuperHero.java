@@ -3,6 +3,7 @@ package com.bcorpse.teststrategry.superhero.domain;
 public final class SuperHero {
 
     private String firstName;
+    private String midName;
     private String lastName;
     private String heroName;
 
@@ -12,6 +13,13 @@ public final class SuperHero {
 
     public SuperHero(String firstName, String lastName, String heroName) {
         this.firstName = firstName;
+        this.lastName = lastName;
+        this.heroName = heroName;
+    }
+
+    public SuperHero(String firstName, String midName,String lastName, String heroName) {
+        this.firstName = firstName;
+        this.midName = midName;
         this.lastName = lastName;
         this.heroName = heroName;
     }
@@ -27,6 +35,13 @@ public final class SuperHero {
     public String getHeroName() {
         return heroName;
     }
+    public String getMidName() {
+        return midName;
+    }
+
+    public void setMidName(String midName) {
+        this.midName = midName;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -36,6 +51,7 @@ public final class SuperHero {
         SuperHero superHero = (SuperHero) o;
 
         if (firstName != null ? !firstName.equals(superHero.firstName) : superHero.firstName != null) return false;
+        if (midName != null ? !midName.equals(superHero.midName) : superHero.midName != null) return false;
         if (lastName != null ? !lastName.equals(superHero.lastName) : superHero.lastName != null) return false;
         return heroName != null ? heroName.equals(superHero.heroName) : superHero.heroName == null;
     }
@@ -43,6 +59,7 @@ public final class SuperHero {
     @Override
     public int hashCode() {
         int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (midName != null ? midName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (heroName != null ? heroName.hashCode() : 0);
         return result;
